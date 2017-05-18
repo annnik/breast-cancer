@@ -8,8 +8,9 @@ import math
 data = np.genfromtxt('cancer.txt',delimiter=',')
 x=data[:,0]
 y=data[:,1]
-m=y.size()
-a=ones(m,2)
+m=len(y)
+a=91
+#a=np.ones(m,2)
 
 
 def cost(x, y, theta=np.zeros((2,1))):
