@@ -1,0 +1,48 @@
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: .*
+  script: main.app
+
+libraries:
+- name: jinja2
+  version: "2.6"
+- name: markupsafe
+  version: "0.15"
+name:cycler
+version:"0.10.0"
+name:datasets	
+version:"0.0.9"	
+name:docopt	
+version:"0.6.2"
+name:functools32	
+version: "3.2.3.post2"	
+name:matplotlib	
+version:"2.0.1"	
+name:numpy	
+version:"1.12.1"	
+name:pandas	
+version:"0.19.2"
+name:patsy	
+version:"0.4.1"
+name:pip	
+version:"9.0.1"
+name:pyparsing	
+version:"2.2.0"
+name:pyplotter	
+version:"0.0.6"
+name:python-dateutil	
+version:"2.6.0"	
+name:pytz	
+version:"2017.2"
+name:scikit-learn	
+version:"0.18.1"
+name:setuptools	
+version:"28.8.0"	
+name:six	
+version:"1.10.0"	
+name:sklearn	
+version:"0.0"	
+  

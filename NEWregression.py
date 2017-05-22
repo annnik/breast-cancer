@@ -77,13 +77,14 @@ def evaluate_algorithm(dataset, algorithm, n_folds, *args):
 		actual = [row[-1] for row in fold]
 		rmse = rmse_metric(actual, predicted)
 		scores.append(rmse)
+	plt.plot(actual, 'k', color='blue', label='Actual data')
+	plt.plot(predicted, 'k--', label='Predicted data')
 	return scores
 
 def predict(row, coefficients):
 	yhat = coefficients[0]
 	for i in range(len(row)-1):
 		yhat += row[i]*coefficients[i+1]
-
 	return yhat
 
 def coefficients_sgd(train, l_rate, n_epoch):
@@ -95,23 +96,25 @@ def coefficients_sgd(train, l_rate, n_epoch):
 			coef[0] = coef[0] - l_rate*error
 			for i in range(len(coef)-1):
 				coef[i+1] = coef[i+1] - l_rate*error*row[i]
+	#plt.plot(coef)
 	return coef
 
 def multivariate_linear_regression(train, test, l_rate, n_epoch):
 	predictions = list()
 	coef = coefficients_sgd(train, l_rate, n_epoch)
+	#plt.plot(coef)
 	for row in test:
 		yhat = predict(row, coef)
 		predictions.append(yhat)
-	print('predictions: %s' % predictions)
-	plt.plot(predictions,'o')
-	plt.show()
+	#print('predictions: %s' % predictions)
+	#plt.plot(predictions,'o')
+	#plt.show()
 	savepred=predictions
 	return(predictions)
 
 
 seed(1)
-filename = 'brcancer.csv'
+filename = 'brcancer2.csv'
 dataset = load_csv(filename)
 # df=read_csv(filename, header = None, names = ['x','y'])
 #
@@ -160,25 +163,83 @@ normalize_dataset(dataset, minmax)
 n_folds = 5
 l_rate = 0.01
 n_epoch = 50
-
-
-
+#
+#
+#
 scores = evaluate_algorithm(dataset, multivariate_linear_regression, n_folds, l_rate, n_epoch)
-
-# names=['id','ClumpThickness','UniformityofCellSize','UniformityofCellShape',	'MarginalAdhesion',	'SingleEpithelialCellSize',	'BareNuclei',	'BlandChromatin',	'NormalNucleoli',	'Mitoses',	'Class']
-# data=read_csv(filename, delimiter='\t',names=names).dropna()
-# plt.scatter(data.Mitoses, data.Class)
-# plt.xlabel("Number of Votes")
-# plt.ylabel("IMDB Rating")
-# plt.xscale('log')
-
-#plt.plot(dataset,'o')
-#plt.plot(predictions,'o')
-#plt.show()
-
-plt.plot(scores)
-plt.show()
-
 print('Scores: %s' % scores)
 print('Mean RMSE: %.3f' % (sum(scores)/float(len(scores))))
-
+#
+# # names=['id','ClumpThickness','UniformityofCellSize','UniformityofCellShape',	'MarginalAdhesion',	'SingleEpithelialCellSize',	'BareNuclei',	'BlandChromatin',	'NormalNucleoli',	'Mitoses',	'Class']
+# # data=read_csv(filename, delimiter='\t',names=names).dropna()
+# # plt.scatter(data.Mitoses, data.Class)
+# # plt.xlabel("Number of Votes")
+# # plt.ylabel("IMDB Rating")
+# # plt.xscale('log')
+#
+# #plt.plot(dataset,'o')
+# #plt.plot(predictions,'o')
+# #plt.show()
+# #plt.plot(minmax)
+# #plt.plot(dataset,'ro',alpha=.2)
+plt.show()
+#
+# n_folds = 7
+# l_rate = 0.01
+# n_epoch = 50
+# scores = evaluate_algorithm(dataset, multivariate_linear_regression, n_folds, l_rate, n_epoch)
+# print('Scores: %s' % scores)
+# print('Mean RMSE: %.3f' % (sum(scores)/float(len(scores))))
+# # plt.plot(scores)
+# # plt.show()
+# n_folds = 10
+# l_rate = 0.01
+# n_epoch = 50
+# scores = evaluate_algorithm(dataset, multivariate_linear_regression, n_folds, l_rate, n_epoch)
+# #plt.plot(scores)
+# plt.legend();
+# #plt.show()
+#
+# print('Scores: %s' % scores)
+# print('Mean RMSE: %.3f' % (sum(scores)/float(len(scores))))
+# n_folds = 4
+# l_rate = 0.01
+# n_epoch = 50
+# scores = evaluate_algorithm(dataset, multivariate_linear_regression, n_folds, l_rate, n_epoch)
+# #plt.plot(scores)
+# plt.legend();
+# #plt.show()
+#
+# print('Scores: %s' % scores)
+# print('Mean RMSE: %.3f' % (sum(scores)/float(len(scores))))
+# n_folds = 6
+# l_rate = 0.01
+# n_epoch = 50
+# scores = evaluate_algorithm(dataset, multivariate_linear_regression, n_folds, l_rate, n_epoch)
+# #plt.plot(scores)
+# plt.legend();
+# #plt.show()
+#
+# print('Scores: %s' % scores)
+# print('Mean RMSE: %.3f' % (sum(scores)/float(len(scores))))
+# n_folds = 8
+# l_rate = 0.01
+# n_epoch = 50
+# scores = evaluate_algorithm(dataset, multivariate_linear_regression, n_folds, l_rate, n_epoch)
+# #plt.plot(scores)
+# plt.legend();
+# #plt.show()
+#
+# print('Scores: %s' % scores)
+# print('Mean RMSE: %.3f' % (sum(scores)/float(len(scores))))
+# n_folds = 9
+# l_rate = 0.01
+# n_epoch = 50
+# scores = evaluate_algorithm(dataset, multivariate_linear_regression, n_folds, l_rate, n_epoch)
+# #plt.plot(scores)
+# plt.legend();
+# #plt.show()
+#
+# print('Scores: %s' % scores)
+# print('Mean RMSE: %.3f' % (sum(scores)/float(len(scores))))
+#
